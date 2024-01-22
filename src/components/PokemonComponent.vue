@@ -1,8 +1,13 @@
 <template>
   <li>
-    <h3>{{ pokemon.name.french }}</h3>
+    <h3>{{ pokemon.name }}</h3>
     <br />
-    <img :src="'/thumbnails/' + pokemon.id + '.png'" alt="" />
+    <img
+      :src="
+        'https://img.pokemondb.net/sprites/bank/normal/' + pokemon.name + '.png'
+      "
+      alt=""
+    />
     <button v-if="ajout == true" v-on:click="sendAdd(pokemon, index)">
       Ajouter
     </button>

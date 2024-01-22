@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <!-- <div>
+      Infos : {{ pokemonList }}
+    </div> -->
     <div class="user">
       <h2>Nom du dresseur : {{ user }}</h2>
       <input id="user" type="text" v-model="user" />
@@ -34,6 +37,7 @@
 
 <script>
 import PokemonComponent from "./components/PokemonComponent.vue";
+import axios from "axios";
 export default {
   components: {
     PokemonComponent,
@@ -406,6 +410,7 @@ export default {
         },
       ],
       myTeam: [],
+      info: null,
     };
   },
   methods: {
@@ -417,6 +422,14 @@ export default {
       this.pokemonList.push(pokemon);
       this.myTeam.splice(i, 1);
     },
+  },
+  mounted() {
+    axios
+      .get("https://pokeapi.co/api/v2/pokemon")
+      .then((response) => (this.pokemonList = response.data.results))
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };
 </script>
